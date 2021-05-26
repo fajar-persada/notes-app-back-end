@@ -66,7 +66,7 @@ const getNoteByIdHandler = (request, h) => {
 }
 
 const editNoteByIdHandler = (request, h) => {
-  const id = request.params
+  const { id } = request.params
 
   const { title, tags, body } = request.payload
   const updatedAt = new Date().toISOString()
@@ -103,7 +103,7 @@ const deleteNodeByIdHandler = (request, h) => {
 
   const index = notes.findIndex((note) => note.id === id)
 
-  if (index === -1) {
+  if (index !== -1) {
     notes.splice(index, 1)
     const response = h.response({
       status: 'success',
